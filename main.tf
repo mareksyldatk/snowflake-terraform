@@ -27,13 +27,3 @@ provider "snowflake" {
   authenticator     = "SNOWFLAKE_JWT"
   private_key       = file(pathexpand(var.private_key_path))
 }
-
-moved {
-  from = snowflake_database.tf_db
-  to   = snowflake_database.tf_platform
-}
-
-moved {
-  from = snowflake_warehouse.tf_warehouse
-  to   = snowflake_warehouse.tf_platform
-}
