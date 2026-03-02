@@ -35,3 +35,9 @@ variable "private_key_path" {
   description = "Path to Snowflake RSA private key"
   default     = "~/.ssh/snowflake_tf_snow_key.p8"
 }
+
+variable "public_key_path" {
+  type        = string
+  description = "Path to Snowflake RSA public key"
+  default     = "~/.ssh/snowflake_tf_snow_key.pub"
+}
