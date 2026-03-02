@@ -2,7 +2,8 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/snowflakedb/snowflake" {
-  version = "2.14.0"
+  version     = "2.14.0"
+  constraints = "~> 2.0"
   hashes = [
     "h1:LnlgrWTsh/5tZuLmuaPVfd3HeCT4tUq1yRAUyetUkyo=",
     "zh:042af78187a93d595c6dc4288d70aba0f362251366a9bdd3cb14a8f182671d40",
