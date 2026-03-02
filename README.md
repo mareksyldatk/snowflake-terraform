@@ -78,6 +78,8 @@ terraform plan
 
 This project configures Git integration using Terraform-managed secret + SQL-based integration creation. Set the allowed repository URL via `github_repo_url` in `terraform.tfvars`.
 
+Note: the current value points to this Terraform repo for bootstrap/testing. Later, replace `github_repo_url` with your dbt repository URL.
+
 Note: the Snowflake Terraform provider currently does not support `git_https_api` in `snowflake_api_integration`, so this repo uses `snowflake_execute` for the API integration statement.
 
 Reference:
