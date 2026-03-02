@@ -9,11 +9,12 @@ terraform {
   }
 }
 
+# Default provider
 provider "snowflake" {
   organization_name = var.organization_name
   account_name      = var.account_name
   user              = var.user
-  role              = var.role
+  role              = "SYSADMIN"
   authenticator     = "SNOWFLAKE_JWT"
   private_key       = file(pathexpand(var.private_key_path))
 }
@@ -23,7 +24,17 @@ provider "snowflake" {
   organization_name = var.organization_name
   account_name      = var.account_name
   user              = var.user
-  role              = var.useradmin_role
+  role              = "USERADMIN"
+  authenticator     = "SNOWFLAKE_JWT"
+  private_key       = file(pathexpand(var.private_key_path))
+}
+
+provider "snowflake" {
+  alias             = "accountadmin"
+  organization_name = var.organization_name
+  account_name      = var.account_name
+  user              = var.user
+  role              = "ACCOUNTADMIN"
   authenticator     = "SNOWFLAKE_JWT"
   private_key       = file(pathexpand(var.private_key_path))
 }

@@ -18,18 +18,6 @@ variable "user" {
   default     = "SVC_TERRAFORM"
 }
 
-variable "role" {
-  type        = string
-  description = "Snowflake role for data-plane resources (databases/warehouses)"
-  default     = "SYSADMIN"
-}
-
-variable "useradmin_role" {
-  type        = string
-  description = "Snowflake role for account-level security resources (roles/grants)"
-  default     = "USERADMIN"
-}
-
 variable "private_key_path" {
   type        = string
   description = "Path to Snowflake RSA private key"
@@ -40,4 +28,19 @@ variable "public_key_path" {
   type        = string
   description = "Path to Snowflake RSA public key"
   default     = "~/.ssh/snowflake_tf_snow_key.pub"
+}
+
+############################################
+# Git Integration Setup
+############################################
+
+variable "github_username" {
+  type        = string
+  description = "GitHub username for Snowflake Git credentials"
+}
+
+variable "github_token" {
+  type        = string
+  description = "GitHub PAT for Snowflake Git credentials"
+  sensitive   = true
 }

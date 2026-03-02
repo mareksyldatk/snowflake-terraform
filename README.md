@@ -70,3 +70,13 @@ terraform plan
 > **State Note:** This repository currently uses local Terraform state (files on your machine) for simplicity. In production, move state to AWS (for example S3 backend with state locking) before team usage.
 
 3. Optional (CI): use `TF_VAR_organization_name`, `TF_VAR_account_name`, etc., instead of `terraform.tfvars`.
+
+## Git Integration
+
+This project configures Git integration for `https://github.com/mareksyldatk/snowflake-terraform` using Terraform-managed secret + SQL-based integration creation.
+
+Note: the Snowflake Terraform provider currently does not support `git_https_api` in `snowflake_api_integration`, so this repo uses `snowflake_execute` for the API integration statement.
+
+Reference:
+- https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/api_integration
+- Provider note: "Currently, API integrations for git_https_api API provider are not supported. It will be added in the future."
