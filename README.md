@@ -57,6 +57,9 @@ account_name      = "your_account_name"
 # user             = "SVC_TERRAFORM"
 # role             = "SYSADMIN"
 # private_key_path = "~/.ssh/snowflake_tf_snow_key.p8"
+github_username   = "your_github_username"
+github_token      = "your_github_pat"
+github_repo_url   = "https://github.com/mareksyldatk/snowflake-terraform"
 ```
 
 2. Run Terraform:
@@ -73,7 +76,7 @@ terraform plan
 
 ## Git Integration
 
-This project configures Git integration for `https://github.com/mareksyldatk/snowflake-terraform` using Terraform-managed secret + SQL-based integration creation.
+This project configures Git integration using Terraform-managed secret + SQL-based integration creation. Set the allowed repository URL via `github_repo_url` in `terraform.tfvars`.
 
 Note: the Snowflake Terraform provider currently does not support `git_https_api` in `snowflake_api_integration`, so this repo uses `snowflake_execute` for the API integration statement.
 

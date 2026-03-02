@@ -44,3 +44,8 @@ variable "github_token" {
   description = "GitHub PAT for Snowflake Git credentials"
   sensitive   = true
 }
+
+variable "github_repo_url" {
+  type        = string
+  description = "GitHub repository URL allowed for Snowflake Git API integration"
+}
