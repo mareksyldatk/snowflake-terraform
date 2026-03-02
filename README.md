@@ -32,10 +32,9 @@ CREATE USER SVC_TERRAFORM
   RSA_PUBLIC_KEY = '<PASTE_PUBLIC_KEY_VALUE>';
 
 GRANT ROLE SYSADMIN TO USER SVC_TERRAFORM;
-GRANT ROLE SECURITYADMIN TO USER SVC_TERRAFORM;
 ```
 
-> **Security Note (Production):** `SYSADMIN` and `SECURITYADMIN` are granted here only to keep this lab simple. In production, use least-privilege role grants, and store/manage key material in a secrets manager (for example HashiCorp Vault, Azure Key Vault, or AWS Secrets Manager).
+> **Security Note (Production):** This lab keeps bootstrap simple. In production, use least-privilege role grants, and store/manage key material in a secrets manager (for example HashiCorp Vault, Azure Key Vault, or AWS Secrets Manager).
 
 4. Get your Snowflake organization/account identifiers:
 ```sql
@@ -65,6 +64,8 @@ account_name      = "your_account_name"
 terraform init
 terraform plan
 ```
+
+`USERADMIN` grant for `SVC_TERRAFORM` is managed by Terraform in `grants.tf`.
 
 > **State Note:** This repository currently uses local Terraform state (files on your machine) for simplicity. In production, move state to AWS (for example S3 backend with state locking) before team usage.
 

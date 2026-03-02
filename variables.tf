@@ -20,8 +20,14 @@ variable "user" {
 
 variable "role" {
   type        = string
-  description = "Snowflake role for provider operations"
+  description = "Snowflake role for data-plane resources (databases/warehouses)"
   default     = "SYSADMIN"
+}
+
+variable "useradmin_role" {
+  type        = string
+  description = "Snowflake role for account-level security resources (roles/grants)"
+  default     = "USERADMIN"
 }
 
 variable "private_key_path" {

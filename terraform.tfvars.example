@@ -3,4 +3,5 @@ account_name      = "your_account_name"
 # Optional (defaults shown):
 # user             = "SVC_TERRAFORM"
 # role             = "SYSADMIN"
+# useradmin_role   = "USERADMIN"
 # private_key_path = "~/.ssh/snowflake_tf_snow_key.p8"

@@ -18,6 +18,16 @@ provider "snowflake" {
   private_key       = file(pathexpand(var.private_key_path))
 }
 
+provider "snowflake" {
+  alias             = "useradmin"
+  organization_name = var.organization_name
+  account_name      = var.account_name
+  user              = var.user
+  role              = var.useradmin_role
+  authenticator     = "SNOWFLAKE_JWT"
+  private_key       = file(pathexpand(var.private_key_path))
+}
+
 moved {
   from = snowflake_database.tf_db
   to   = snowflake_database.tf_platform
