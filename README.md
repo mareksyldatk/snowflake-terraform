@@ -1,5 +1,11 @@
 # Snowflake Terraform Bootstrap
 
+## References
+- Example TF project: https://www.snowflake.com/en/developers/guides/terraforming-snowflake/#create-a-service-user-for-terraform
+- Terraform Snowflake provider docs: https://docs.snowflake.com/en/user-guide/terraform
+
+Next steps in this repository follow those references.
+
 ## Create a Service User for Terraform
 Based on Snowflake’s quickstart section:  
 https://www.snowflake.com/en/developers/guides/terraforming-snowflake/#create-a-service-user-for-terraform

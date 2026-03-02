@@ -16,3 +16,8 @@ provider "snowflake" {
   authenticator     = "SNOWFLAKE_JWT"
   private_key       = file(pathexpand(var.private_key_path))
 }
+
+resource "snowflake_database" "tf_db" {
+  name         = "TF_PLATFORM"
+  is_transient = false
+}
