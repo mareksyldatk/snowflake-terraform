@@ -34,8 +34,6 @@ CREATE USER SVC_TERRAFORM
 GRANT ROLE SYSADMIN TO USER SVC_TERRAFORM;
 ```
 
-> **Security Note (Production):** This lab keeps bootstrap simple. In production, use least-privilege role grants, and store/manage key material in a secrets manager (for example HashiCorp Vault, Azure Key Vault, or AWS Secrets Manager).
-
 4. Get your Snowflake organization/account identifiers:
 ```sql
 SELECT LOWER(current_organization_name()) as your_org_name, LOWER(current_account_name()) as your_account_name;
@@ -55,11 +53,11 @@ organization_name = "your_org_name"
 account_name      = "your_account_name"
 # Optional (defaults shown):
 # user             = "SVC_TERRAFORM"
-# role             = "SYSADMIN"
 # private_key_path = "~/.ssh/snowflake_tf_snow_key.p8"
 github_username   = "your_github_username"
 github_token      = "your_github_pat"
 github_repo_url   = "https://github.com/mareksyldatk/snowflake-terraform"
+github_integration_name = "TF_GITHUB_INT_SNOWFLAKE_TERRAFORM"
 ```
 
 2. Run Terraform:
@@ -69,14 +67,20 @@ terraform plan
 ```
 
 `USERADMIN` grant for `SVC_TERRAFORM` is managed by Terraform in `grants.tf`.
-
-> **State Note:** This repository currently uses local Terraform state (files on your machine) for simplicity. In production, move state to AWS (for example S3 backend with state locking) before team usage.
+Additional service principals (`TF_SVC_INGEST`, `TF_EXT_DBT`, `TF_EXT_BI`) are managed in Terraform via `snowflake_service_user` resources in `users.tf`.
 
 3. Optional (CI): use `TF_VAR_organization_name`, `TF_VAR_account_name`, etc., instead of `terraform.tfvars`.
 
+## Production Notes
+
+- Use least-privilege role grants. Keep bootstrap grants minimal and reduce broad admin access.
+- Store and manage key material in a secrets manager (for example HashiCorp Vault, Azure Key Vault, or AWS Secrets Manager).
+- This repository currently uses local Terraform state for simplicity. In production, move state to AWS (for example S3 backend with state locking) before team usage.
+- `tls_private_key` stores generated private keys in Terraform state. This is acceptable for lab/dev, but avoid it in production. Prefer generating keys outside Terraform and passing only the public key to resources.
+
 ## Git Integration
 
-This project configures Git integration using Terraform-managed secret + SQL-based integration creation. Set the allowed repository URL via `github_repo_url` in `terraform.tfvars`.
+This project configures Git integration using Terraform-managed secret + SQL-based integration creation. Set values via `github_repo_url` and `github_integration_name` in `terraform.tfvars`.
 
 Note: the current value points to this Terraform repo for bootstrap/testing. Later, replace `github_repo_url` with your dbt repository URL.
 

@@ -3,7 +3,7 @@ resource "tls_private_key" "tf_svc_ingest_key" {
   rsa_bits  = 2048
 }
 
-resource "snowflake_user" "tf_svc_ingest" {
+resource "snowflake_service_user" "tf_svc_ingest" {
   provider          = snowflake.useradmin
   name              = "TF_SVC_INGEST"
   default_role      = snowflake_account_role.tf_role_ingest.name
@@ -19,9 +19,9 @@ resource "snowflake_user" "tf_svc_ingest" {
 resource "snowflake_grant_account_role" "tf_role_ingest_to_tf_svc_ingest" {
   provider  = snowflake.useradmin
   role_name = snowflake_account_role.tf_role_ingest.name
-  user_name = snowflake_user.tf_svc_ingest.name
+  user_name = snowflake_service_user.tf_svc_ingest.name
 
-  depends_on = [snowflake_user.tf_svc_ingest]
+  depends_on = [snowflake_service_user.tf_svc_ingest]
 }
 
 resource "tls_private_key" "tf_ext_dbt_key" {
@@ -29,7 +29,7 @@ resource "tls_private_key" "tf_ext_dbt_key" {
   rsa_bits  = 2048
 }
 
-resource "snowflake_user" "tf_ext_dbt" {
+resource "snowflake_service_user" "tf_ext_dbt" {
   provider          = snowflake.useradmin
   name              = "TF_EXT_DBT"
   default_role      = snowflake_account_role.tf_role_dbt.name
@@ -45,9 +45,9 @@ resource "snowflake_user" "tf_ext_dbt" {
 resource "snowflake_grant_account_role" "tf_role_dbt_to_tf_ext_dbt" {
   provider  = snowflake.useradmin
   role_name = snowflake_account_role.tf_role_dbt.name
-  user_name = snowflake_user.tf_ext_dbt.name
+  user_name = snowflake_service_user.tf_ext_dbt.name
 
-  depends_on = [snowflake_user.tf_ext_dbt]
+  depends_on = [snowflake_service_user.tf_ext_dbt]
 }
 
 resource "tls_private_key" "tf_ext_bi_key" {
@@ -55,7 +55,7 @@ resource "tls_private_key" "tf_ext_bi_key" {
   rsa_bits  = 2048
 }
 
-resource "snowflake_user" "tf_ext_bi" {
+resource "snowflake_service_user" "tf_ext_bi" {
   provider          = snowflake.useradmin
   name              = "TF_EXT_BI"
   default_role      = snowflake_account_role.tf_role_bi.name
@@ -70,7 +70,7 @@ resource "snowflake_user" "tf_ext_bi" {
 resource "snowflake_grant_account_role" "tf_role_bi_to_tf_ext_bi" {
   provider  = snowflake.useradmin
   role_name = snowflake_account_role.tf_role_bi.name
-  user_name = snowflake_user.tf_ext_bi.name
+  user_name = snowflake_service_user.tf_ext_bi.name
 
-  depends_on = [snowflake_user.tf_ext_bi]
+  depends_on = [snowflake_service_user.tf_ext_bi]
 }

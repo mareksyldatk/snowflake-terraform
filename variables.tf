@@ -24,12 +24,6 @@ variable "private_key_path" {
   default     = "~/.ssh/snowflake_tf_snow_key.p8"
 }
 
-variable "public_key_path" {
-  type        = string
-  description = "Path to Snowflake RSA public key"
-  default     = "~/.ssh/snowflake_tf_snow_key.pub"
-}
-
 ############################################
 # Git Integration Setup
 ############################################
@@ -48,4 +42,10 @@ variable "github_token" {
 variable "github_repo_url" {
   type        = string
   description = "GitHub repository URL allowed for Snowflake Git API integration"
+}
+
+variable "github_integration_name" {
+  type        = string
+  description = "Snowflake API integration name for Git repository access"
+  default     = "TF_GITHUB_INT_SNOWFLAKE_TERRAFORM"
 }

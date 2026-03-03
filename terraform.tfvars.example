@@ -3,7 +3,7 @@ account_name      = "your_account_name"
 # Optional (defaults shown):
 # user             = "SVC_TERRAFORM"
 # private_key_path = "~/.ssh/snowflake_tf_snow_key.p8"
-# public_key_path  = "~/.ssh/snowflake_tf_snow_key.pub"
 github_username    = "your_github_username"
 github_token       = "your_github_pat"
 github_repo_url    = "https://github.com/mareksyldatk/snowflake-terraform"
+github_integration_name = "TF_GITHUB_INT_SNOWFLAKE_TERRAFORM"

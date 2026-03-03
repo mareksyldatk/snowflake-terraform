@@ -158,7 +158,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_github_int
 
   on_account_object {
     object_type = "INTEGRATION"
-    object_name = "TF_GITHUB_INT_SNOWFLAKE_TERRAFORM"
+    object_name = var.github_integration_name
   }
 
   depends_on = [snowflake_execute.tf_github_int_snowflake_terraform]
