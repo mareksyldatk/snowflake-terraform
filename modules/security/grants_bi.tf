@@ -33,7 +33,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   privileges        = ["USAGE"]
 
   on_schema {
-    schema_name = local.silver_dimensions_schema_fqn
+    schema_name = var.schema_fqns.silver_dimensions
   }
 }
 
@@ -44,7 +44,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = local.silver_dimensions_schema_fqn
+      in_schema          = var.schema_fqns.silver_dimensions
     }
   }
 }
@@ -56,7 +56,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = local.silver_dimensions_schema_fqn
+      in_schema          = var.schema_fqns.silver_dimensions
     }
   }
 }
@@ -68,7 +68,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   on_schema_object {
     all {
       object_type_plural = "VIEWS"
-      in_schema          = local.silver_dimensions_schema_fqn
+      in_schema          = var.schema_fqns.silver_dimensions
     }
   }
 }
@@ -80,7 +80,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   on_schema_object {
     future {
       object_type_plural = "VIEWS"
-      in_schema          = local.silver_dimensions_schema_fqn
+      in_schema          = var.schema_fqns.silver_dimensions
     }
   }
 }
@@ -90,7 +90,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   privileges        = ["USAGE"]
 
   on_schema {
-    schema_name = local.silver_facts_schema_fqn
+    schema_name = var.schema_fqns.silver_facts
   }
 }
 
@@ -101,7 +101,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = local.silver_facts_schema_fqn
+      in_schema          = var.schema_fqns.silver_facts
     }
   }
 }
@@ -113,7 +113,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = local.silver_facts_schema_fqn
+      in_schema          = var.schema_fqns.silver_facts
     }
   }
 }
@@ -125,7 +125,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   on_schema_object {
     all {
       object_type_plural = "VIEWS"
-      in_schema          = local.silver_facts_schema_fqn
+      in_schema          = var.schema_fqns.silver_facts
     }
   }
 }
@@ -137,7 +137,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   on_schema_object {
     future {
       object_type_plural = "VIEWS"
-      in_schema          = local.silver_facts_schema_fqn
+      in_schema          = var.schema_fqns.silver_facts
     }
   }
 }
@@ -147,7 +147,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   privileges        = ["USAGE"]
 
   on_schema {
-    schema_name = local.golden_dataset_schema_fqn
+    schema_name = var.schema_fqns.golden_dataset
   }
 }
 
@@ -158,7 +158,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = local.golden_dataset_schema_fqn
+      in_schema          = var.schema_fqns.golden_dataset
     }
   }
 }
@@ -170,7 +170,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = local.golden_dataset_schema_fqn
+      in_schema          = var.schema_fqns.golden_dataset
     }
   }
 }
@@ -182,7 +182,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   on_schema_object {
     all {
       object_type_plural = "VIEWS"
-      in_schema          = local.golden_dataset_schema_fqn
+      in_schema          = var.schema_fqns.golden_dataset
     }
   }
 }
@@ -194,7 +194,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   on_schema_object {
     future {
       object_type_plural = "VIEWS"
-      in_schema          = local.golden_dataset_schema_fqn
+      in_schema          = var.schema_fqns.golden_dataset
     }
   }
 }

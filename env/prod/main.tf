@@ -51,7 +51,7 @@ module "security" {
   }
 
   database_names          = module.core.database_names
-  schema_names            = module.core.schema_names
+  schema_fqns             = module.core.schema_fqns
   warehouse_names         = module.core.warehouse_names
   github_integration_name = module.integrations.integration_name
   github_secret_fqn       = module.integrations.secret_fully_qualified_name

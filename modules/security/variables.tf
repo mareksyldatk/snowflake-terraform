@@ -7,7 +7,7 @@ variable "database_names" {
   })
 }
 
-variable "schema_names" {
+variable "schema_fqns" {
   type = object({
     bronze_bronze           = string
     silver_dimensions       = string

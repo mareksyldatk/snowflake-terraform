@@ -60,7 +60,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_bronze_bro
   privileges        = ["USAGE", "CREATE TABLE"]
 
   on_schema {
-    schema_name = local.bronze_bronze_schema_fqn
+    schema_name = var.schema_fqns.bronze_bronze
   }
 }
 
@@ -71,7 +71,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_bronze_bro
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = local.bronze_bronze_schema_fqn
+      in_schema          = var.schema_fqns.bronze_bronze
     }
   }
 }
@@ -83,7 +83,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_bronze_bro
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = local.bronze_bronze_schema_fqn
+      in_schema          = var.schema_fqns.bronze_bronze
     }
   }
 }
@@ -93,7 +93,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_silver_dim
   privileges        = ["USAGE", "CREATE TABLE", "CREATE VIEW"]
 
   on_schema {
-    schema_name = local.silver_dimensions_schema_fqn
+    schema_name = var.schema_fqns.silver_dimensions
   }
 }
 
@@ -102,7 +102,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_silver_fac
   privileges        = ["USAGE", "CREATE TABLE", "CREATE VIEW"]
 
   on_schema {
-    schema_name = local.silver_facts_schema_fqn
+    schema_name = var.schema_fqns.silver_facts
   }
 }
 
@@ -111,7 +111,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_golden_dat
   privileges        = ["USAGE", "CREATE TABLE", "CREATE VIEW"]
 
   on_schema {
-    schema_name = local.golden_dataset_schema_fqn
+    schema_name = var.schema_fqns.golden_dataset
   }
 }
 
@@ -120,7 +120,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_platform_s
   privileges        = ["USAGE"]
 
   on_schema {
-    schema_name = local.platform_security_schema_fqn
+    schema_name = var.schema_fqns.platform_security
   }
 }
 
@@ -129,7 +129,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_platform_i
   privileges        = ["USAGE"]
 
   on_schema {
-    schema_name = local.platform_integration_schema_fqn
+    schema_name = var.schema_fqns.platform_integration
   }
 }
 
@@ -138,7 +138,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_platform_d
   privileges        = ["USAGE", "CREATE TABLE", "CREATE VIEW"]
 
   on_schema {
-    schema_name = local.platform_dbt_runtime_schema_fqn
+    schema_name = var.schema_fqns.platform_dbt_runtime
   }
 }
 
@@ -147,7 +147,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_dbt_tf_platform_d
   privileges        = ["USAGE", "CREATE DBT PROJECT", "CREATE TASK"]
 
   on_schema {
-    schema_name = local.platform_dbt_deployment_schema_fqn
+    schema_name = var.schema_fqns.platform_dbt_deployment
   }
 }
 

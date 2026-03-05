@@ -23,7 +23,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_ingest_tf_bronze_
   privileges        = ["USAGE", "CREATE TABLE", "CREATE STAGE", "CREATE FILE FORMAT"]
 
   on_schema {
-    schema_name = local.bronze_bronze_schema_fqn
+    schema_name = var.schema_fqns.bronze_bronze
   }
 }
 
@@ -34,7 +34,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_ingest_tf_bronze_
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = local.bronze_bronze_schema_fqn
+      in_schema          = var.schema_fqns.bronze_bronze
     }
   }
 }
@@ -46,7 +46,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_ingest_tf_bronze_
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = local.bronze_bronze_schema_fqn
+      in_schema          = var.schema_fqns.bronze_bronze
     }
   }
 }

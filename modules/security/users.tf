@@ -8,7 +8,7 @@ resource "snowflake_service_user" "tf_svc_ingest" {
   name              = "TF_SVC_INGEST"
   default_role      = snowflake_account_role.tf_role_ingest.name
   default_warehouse = var.warehouse_names.ingest
-  default_namespace = local.bronze_bronze_schema_fqn
+  default_namespace = var.schema_fqns.bronze_bronze
   rsa_public_key = replace(
     tls_private_key.tf_svc_ingest_key.public_key_pem,
     "/-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----|\\s/",
@@ -34,7 +34,7 @@ resource "snowflake_service_user" "tf_ext_dbt" {
   name              = "TF_EXT_DBT"
   default_role      = snowflake_account_role.tf_role_dbt.name
   default_warehouse = var.warehouse_names.dbt
-  default_namespace = local.platform_dbt_runtime_schema_fqn
+  default_namespace = var.schema_fqns.platform_dbt_runtime
   rsa_public_key = replace(
     tls_private_key.tf_ext_dbt_key.public_key_pem,
     "/-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----|\\s/",
