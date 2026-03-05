@@ -47,4 +47,5 @@ Current bootstrap URL points to this Terraform repo; replace it later with your 
 - Apply least-privilege role grants; keep bootstrap admin access minimal.
 - `tls_private_key` stores private keys in Terraform state (acceptable for lab/dev, avoid in prod).
 - Move state/backend to AWS for team usage (for example S3 + locking).
+- `private_key_path` is acceptable for local operator use. For production CI, prefer a sensitive `private_key_pem` input sourced at runtime from AWS Secrets Manager instead of relying on a file path.
 - Store secrets and key material in Vault / Azure Key Vault / AWS Secrets Manager.

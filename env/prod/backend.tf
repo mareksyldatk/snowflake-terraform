@@ -1,3 +1,9 @@
 terraform {
   backend "local" {}
+  required_providers {
+    snowflake = {
+      source  = "snowflakedb/snowflake"
+      version = "2.9.0"
+    }
+  }
 }
