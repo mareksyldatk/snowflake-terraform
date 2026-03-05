@@ -7,8 +7,8 @@ resource "snowflake_service_user" "tf_svc_ingest" {
   provider          = snowflake.useradmin
   name              = "TF_SVC_INGEST"
   default_role      = snowflake_account_role.tf_role_ingest.name
-  default_warehouse = snowflake_warehouse.tf_ingest.name
-  default_namespace = "${snowflake_database.tf_bronze.name}.${snowflake_schema.tf_bronze_bronze.name}"
+  default_warehouse = var.warehouse_names.ingest
+  default_namespace = local.bronze_bronze_schema_fqn
   rsa_public_key = replace(
     tls_private_key.tf_svc_ingest_key.public_key_pem,
     "/-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----|\\s/",
@@ -33,8 +33,8 @@ resource "snowflake_service_user" "tf_ext_dbt" {
   provider          = snowflake.useradmin
   name              = "TF_EXT_DBT"
   default_role      = snowflake_account_role.tf_role_dbt.name
-  default_warehouse = snowflake_warehouse.tf_dbt.name
-  default_namespace = "${snowflake_database.tf_platform.name}.${snowflake_schema.tf_platform_dbt_runtime.name}"
+  default_warehouse = var.warehouse_names.dbt
+  default_namespace = local.platform_dbt_runtime_schema_fqn
   rsa_public_key = replace(
     tls_private_key.tf_ext_dbt_key.public_key_pem,
     "/-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----|\\s/",
@@ -59,7 +59,7 @@ resource "snowflake_service_user" "tf_ext_bi" {
   provider          = snowflake.useradmin
   name              = "TF_EXT_BI"
   default_role      = snowflake_account_role.tf_role_bi.name
-  default_warehouse = snowflake_warehouse.tf_bi.name
+  default_warehouse = var.warehouse_names.bi
   rsa_public_key = replace(
     tls_private_key.tf_ext_bi_key.public_key_pem,
     "/-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----|\\s/",

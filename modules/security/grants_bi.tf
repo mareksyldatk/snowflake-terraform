@@ -4,7 +4,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_bi_wh_usage
 
   on_account_object {
     object_type = "WAREHOUSE"
-    object_name = snowflake_warehouse.tf_bi.name
+    object_name = var.warehouse_names.bi
   }
 }
 
@@ -14,7 +14,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_usag
 
   on_account_object {
     object_type = "DATABASE"
-    object_name = snowflake_database.tf_silver.name
+    object_name = var.database_names.silver
   }
 }
 
@@ -24,7 +24,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_usag
 
   on_account_object {
     object_type = "DATABASE"
-    object_name = snowflake_database.tf_golden.name
+    object_name = var.database_names.golden
   }
 }
 
@@ -33,7 +33,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   privileges        = ["USAGE"]
 
   on_schema {
-    schema_name = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_dimensions.name}"
+    schema_name = local.silver_dimensions_schema_fqn
   }
 }
 
@@ -44,7 +44,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_dimensions.name}"
+      in_schema          = local.silver_dimensions_schema_fqn
     }
   }
 }
@@ -56,7 +56,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_dimensions.name}"
+      in_schema          = local.silver_dimensions_schema_fqn
     }
   }
 }
@@ -68,7 +68,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   on_schema_object {
     all {
       object_type_plural = "VIEWS"
-      in_schema          = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_dimensions.name}"
+      in_schema          = local.silver_dimensions_schema_fqn
     }
   }
 }
@@ -80,7 +80,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_dime
   on_schema_object {
     future {
       object_type_plural = "VIEWS"
-      in_schema          = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_dimensions.name}"
+      in_schema          = local.silver_dimensions_schema_fqn
     }
   }
 }
@@ -90,7 +90,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   privileges        = ["USAGE"]
 
   on_schema {
-    schema_name = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_facts.name}"
+    schema_name = local.silver_facts_schema_fqn
   }
 }
 
@@ -101,7 +101,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_facts.name}"
+      in_schema          = local.silver_facts_schema_fqn
     }
   }
 }
@@ -113,7 +113,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_facts.name}"
+      in_schema          = local.silver_facts_schema_fqn
     }
   }
 }
@@ -125,7 +125,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   on_schema_object {
     all {
       object_type_plural = "VIEWS"
-      in_schema          = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_facts.name}"
+      in_schema          = local.silver_facts_schema_fqn
     }
   }
 }
@@ -137,7 +137,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_silver_fact
   on_schema_object {
     future {
       object_type_plural = "VIEWS"
-      in_schema          = "${snowflake_database.tf_silver.name}.${snowflake_schema.tf_silver_facts.name}"
+      in_schema          = local.silver_facts_schema_fqn
     }
   }
 }
@@ -147,7 +147,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   privileges        = ["USAGE"]
 
   on_schema {
-    schema_name = "${snowflake_database.tf_golden.name}.${snowflake_schema.tf_golden_dataset.name}"
+    schema_name = local.golden_dataset_schema_fqn
   }
 }
 
@@ -158,7 +158,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = "${snowflake_database.tf_golden.name}.${snowflake_schema.tf_golden_dataset.name}"
+      in_schema          = local.golden_dataset_schema_fqn
     }
   }
 }
@@ -170,7 +170,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = "${snowflake_database.tf_golden.name}.${snowflake_schema.tf_golden_dataset.name}"
+      in_schema          = local.golden_dataset_schema_fqn
     }
   }
 }
@@ -182,7 +182,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   on_schema_object {
     all {
       object_type_plural = "VIEWS"
-      in_schema          = "${snowflake_database.tf_golden.name}.${snowflake_schema.tf_golden_dataset.name}"
+      in_schema          = local.golden_dataset_schema_fqn
     }
   }
 }
@@ -194,7 +194,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_bi_tf_golden_data
   on_schema_object {
     future {
       object_type_plural = "VIEWS"
-      in_schema          = "${snowflake_database.tf_golden.name}.${snowflake_schema.tf_golden_dataset.name}"
+      in_schema          = local.golden_dataset_schema_fqn
     }
   }
 }

@@ -13,7 +13,3 @@ output "managed_service_user_public_keys" {
     TF_EXT_BI     = tls_private_key.tf_ext_bi_key.public_key_pem
   }
 }
-
-output "github_integration_name" {
-  value = var.github_integration_name
-}

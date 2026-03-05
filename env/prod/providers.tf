@@ -1,19 +1,3 @@
-terraform {
-  required_version = ">= 1.3.0"
-
-  required_providers {
-    snowflake = {
-      source  = "snowflakedb/snowflake"
-      version = "~> 2.0"
-    }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "~> 4.0"
-    }
-  }
-}
-
-# Default provider
 provider "snowflake" {
   organization_name = var.organization_name
   account_name      = var.account_name
@@ -42,3 +26,5 @@ provider "snowflake" {
   authenticator     = "SNOWFLAKE_JWT"
   private_key       = file(pathexpand(var.private_key_path))
 }
+
+provider "tls" {}

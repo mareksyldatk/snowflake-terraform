@@ -1,7 +1,3 @@
-############################################
-# Snowflake Provider Setup
-############################################
-
 variable "organization_name" {
   type        = string
   description = "Snowflake organization name"
@@ -23,10 +19,6 @@ variable "private_key_path" {
   description = "Path to Snowflake RSA private key"
   default     = "~/.ssh/snowflake_tf_snow_key.p8"
 }
-
-############################################
-# Git Integration Setup
-############################################
 
 variable "github_username" {
   type        = string

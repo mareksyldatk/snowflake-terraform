@@ -4,7 +4,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_ingest_tf_ingest_
 
   on_account_object {
     object_type = "WAREHOUSE"
-    object_name = snowflake_warehouse.tf_ingest.name
+    object_name = var.warehouse_names.ingest
   }
 }
 
@@ -14,7 +14,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_ingest_tf_bronze_
 
   on_account_object {
     object_type = "DATABASE"
-    object_name = snowflake_database.tf_bronze.name
+    object_name = var.database_names.bronze
   }
 }
 
@@ -23,7 +23,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_ingest_tf_bronze_
   privileges        = ["USAGE", "CREATE TABLE", "CREATE STAGE", "CREATE FILE FORMAT"]
 
   on_schema {
-    schema_name = "${snowflake_database.tf_bronze.name}.${snowflake_schema.tf_bronze_bronze.name}"
+    schema_name = local.bronze_bronze_schema_fqn
   }
 }
 
@@ -34,7 +34,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_ingest_tf_bronze_
   on_schema_object {
     all {
       object_type_plural = "TABLES"
-      in_schema          = "${snowflake_database.tf_bronze.name}.${snowflake_schema.tf_bronze_bronze.name}"
+      in_schema          = local.bronze_bronze_schema_fqn
     }
   }
 }
@@ -46,7 +46,7 @@ resource "snowflake_grant_privileges_to_account_role" "tf_role_ingest_tf_bronze_
   on_schema_object {
     future {
       object_type_plural = "TABLES"
-      in_schema          = "${snowflake_database.tf_bronze.name}.${snowflake_schema.tf_bronze_bronze.name}"
+      in_schema          = local.bronze_bronze_schema_fqn
     }
   }
 }
